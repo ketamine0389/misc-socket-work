@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Socket.IO chat</title>
+        <link rel="style sheet" href="main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    <body>
+        <a id="text">placeholder</a>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+
+            $('body').keypress((e) => {
+                console.log(String.fromCharCode(e.keyCode));
+                socket.emit('key pressed', e.keyCode);
+            });
+          
+            socket.on('key pressed', (kc) => {
+                $('#text').text(String.fromCharCode(kc));
+            });
+        </script>
+    </body>
+</html>
